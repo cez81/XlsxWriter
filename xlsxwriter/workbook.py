@@ -97,6 +97,7 @@ class Workbook(xmlwriter.XMLwriter):
         self.named_ranges = []
         self.custom_colors = []
         self.doc_properties = {}
+        self.custom_properties = {}
         self.createtime = datetime.utcnow()
         self.num_vml_files = 0
         self.num_comment_files = 0
@@ -307,6 +308,19 @@ class Workbook(xmlwriter.XMLwriter):
 
         """
         self.doc_properties = properties
+
+    def set_custom_properties(self, custom_properties):
+        """
+        Set the custom document properties.
+
+        Args:
+            properties: Dictionary of custom document properties.
+
+        Returns:
+            Nothing.
+
+        """
+        self.custom_doc_properties = custom_properties
 
     def set_calc_mode(self, mode, calc_id=None):
         """
