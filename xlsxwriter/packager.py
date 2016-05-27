@@ -448,7 +448,7 @@ class Packager(object):
                                         'docProps/app.xml')
         if self.workbook.custom_properties:
             rels._add_document_relationship('/custom-properties',
-                                        'docProps/custom.xml')
+                                            'docProps/custom.xml')
 
         rels._set_xml_writer(self._filename('_rels/.rels'))
         rels._assemble_xml_file()

@@ -5,9 +5,6 @@
 # Copyright 2013-2016, John McNamara, jmcnamara@cpan.org
 #
 
-# Standard packages.
-from datetime import datetime
-
 # Package imports.
 from . import xmlwriter
 
@@ -35,7 +32,8 @@ class CustomProperties(xmlwriter.XMLwriter):
 
         self.custom_properties = {}
 
-	self.pid_index = 2
+        self.pid_index = 2
+        self.FMTID_GUID = '{D5CDD505-2E9C-101B-9397-08002B2CF9AE}'
 
     ###########################################################################
     #
@@ -62,7 +60,6 @@ class CustomProperties(xmlwriter.XMLwriter):
         # Set the document properties.
         self.custom_properties = custom_properties
 
-
     ###########################################################################
     #
     # XML methods.
@@ -72,8 +69,9 @@ class CustomProperties(xmlwriter.XMLwriter):
         # Write the <cp:customProperties> element.
 
         xmlns = ('http://schemas.openxmlformats.org/officeDocument/2006/' +
-                    'custom-properties')
-        xmlns_vt = 'http://schemas.openxmlformats.org/officeDocument/2006/docPropsVTypes'
+                 'custom-properties')
+        xmlns_vt = ('http://schemas.openxmlformats.org/officeDocument/2006/' +
+                    'docPropsVTypes')
 
         attributes = [
             ('xmlns', xmlns),
@@ -83,7 +81,10 @@ class CustomProperties(xmlwriter.XMLwriter):
         self._xml_start_tag('Properties', attributes)
 
     def _write__property(self, name, data):
-        self._xml_start_tag('property', attributes=[('name', name), ('fmtid', '{D5CDD505-2E9C-101B-9397-08002B2CF9AE}'), ('pid', str(self.pid_index))])
+        self._xml_start_tag('property',
+                            attributes=[('name', name),
+                                        ('fmtid', self.FMTID_GUID),
+                                        ('pid', str(self.pid_index))])
         self._xml_data_element('vt:lpwstr', data)
         self._xml_end_tag('property')
-	self.pid_index += 1
+        self.pid_index += 1

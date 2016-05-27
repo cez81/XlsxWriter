@@ -32,12 +32,11 @@ class TestCompareXLSXFiles(ExcelComparisonTest):
         """Test one custom property"""
 
         workbook = Workbook(self.got_filename)
-	workbook.set_custom_properties({'Owner': 'Jonas Östanbäck'})
-	worksheet = workbook.add_worksheet()
-	worksheet = workbook.add_worksheet()
-	worksheet = workbook.add_worksheet()
+        workbook.set_custom_properties({'Owner': 'Jonas Östanbäck'})
+        worksheet = workbook.add_worksheet()
+        worksheet = workbook.add_worksheet()
+        worksheet = workbook.add_worksheet()
 
         workbook.close()
 
         self.assertExcelEqual()
-
